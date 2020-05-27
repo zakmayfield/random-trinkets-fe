@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <div className='registerComp  w-100 d-flex justify-content-center'>
-      <div className='d-inline-block w-50 '>
+      <div className='d-inline-block w-50 d-flex flex-column align-items-center'>
         <div className='d-flex justify-content-center'>
           <h2>
             {localStorage.getItem('TOKEN')
@@ -50,10 +50,7 @@ const Login = () => {
         </div>
 
         {!localStorage.getItem('TOKEN') ? (
-          <Form
-            onSubmit={handleSubmit}
-            className=' w-100 d-flex flex-column'
-          >
+          <Form onSubmit={handleSubmit} className='w-100 d-flex flex-column' style={{maxWidth: "500px"}}>
             <FormGroup>
               <Label className=''>*Username</Label>
               <Input
@@ -75,16 +72,18 @@ const Login = () => {
               />
             </FormGroup>
 
-            {!loggingIn ? (
-              <Button className='w-75 mt-4 mb-4 ml-5'>Log In</Button>
-            ) : (
-              <Button className='w-75 mt-4 mb-4 ml-5' disabled>
-                Log In
-              </Button>
-            )}
+            <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
+              {!loggingIn ? (
+                <Button className='w-50'>Log In</Button>
+              ) : (
+                <Button className='w-50' disabled>
+                  Log In
+                </Button>
+              )}
+            </FormGroup>
           </Form>
         ) : (
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className='w-100 d-flex flex-column' style={{maxWidth: "500px"}}>
             <FormGroup>
               <Label for='disabledUsername' className=''>
                 *Username

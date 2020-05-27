@@ -25,8 +25,6 @@ const Register = () => {
       axios
         .post(`http://localhost:5500/api/auth/register`, formValues)
         .then(res => {
-          // res.data.success
-          console.log(res)
           localStorage.setItem('REGISTER', res.data.success)
           clearForm()
           setRegistering(false)
@@ -34,7 +32,6 @@ const Register = () => {
           history.push('/login')
         })
         .catch(err => {
-          console.log(err)
           setFormError(err.response.data.error)
           setRegistering(false)
         })
@@ -42,7 +39,7 @@ const Register = () => {
   }
   return (
     <div className='registerComp  w-100 d-flex justify-content-center'>
-      <div className='d-inline-block w-50 '>
+      <div className='d-inline-block w-50 d-flex flex-column align-items-center'>
         <div className='d-flex justify-content-center'>
           <h2>Register</h2>
         </div>
@@ -50,7 +47,8 @@ const Register = () => {
         {!localStorage.getItem('REGISTER') ? (
           <Form
             onSubmit={handleSubmit}
-            className='registerForm  w-100 d-flex flex-column'
+            className='w-100 d-flex flex-column'
+            style={{ maxWidth: '500px' }}
           >
             <FormGroup>
               <Label className=''>*Username</Label>
@@ -84,7 +82,13 @@ const Register = () => {
             </FormGroup>
 
             <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
-              <Button className='w-50'>Sign up</Button>
+              {!registering ? (
+                <Button className='w-50'>Sign Up</Button>
+              ) : (
+                <Button className='w-50' disabled>
+                  Sign Up
+                </Button>
+              )}
             </FormGroup>
           </Form>
         ) : (
@@ -134,6 +138,17 @@ const Register = () => {
           </Form>
         )}
 
+        <div className='errorsDiv w-100 d-flex justify-content-center'>
+          {formError && (
+            <h4
+              className='formErrors p-1'
+              style={{ color: 'red', background: 'lightyellow' }}
+            >
+              {formError}
+            </h4>
+          )}
+        </div>
+
         <div className='w-100 d-flex justify-content-center'>
           <Link to='/login' className='formLink '>
             Already have an account? Log in here!
@@ -141,95 +156,6 @@ const Register = () => {
         </div>
       </div>
     </div>
-
-    /////if things go to shit, use this/////
-    // <div>
-    //   <h2>
-    //     Register
-    //   </h2>
-
-    //   {!localStorage.getItem('TOKEN') ? (
-    //     <Form onSubmit={handleSubmit}>
-    //       <FormGroup>
-    //         <Label className='w-100 label'>
-    //           *Username
-    //           <Input
-    //             onChange={setFormValues}
-    //             type='text'
-    //             placeholder='username'
-    //             name='username'
-    //             value={formValues.username}
-    //           />
-    //         </Label>
-    //       </FormGroup>
-    //       <FormGroup>
-    //         <Label className='w-100 label'>
-    //           *Email
-    //           <Input
-    //             onChange={setFormValues}
-    //             type='text'
-    //             placeholder='email'
-    //             name='email'
-    //             value={formValues.email}
-    //           />
-    //         </Label>
-    //       </FormGroup>
-    //       <FormGroup>
-    //         <Label className='w-100 label'>
-    //           Password
-    //           <Input
-    //             onChange={setFormValues}
-    //             type='password'
-    //             placeholder='password'
-    //             name='password'
-    //             value={formValues.password}
-    //           />
-    //         </Label>
-    //       </FormGroup>
-
-    //       {!registering ? (
-    //         <Button className='w-75 mt-4 mb-4 ml-5'>Sign up</Button>
-    //       ) : (
-    //         <Button className='w-75 mt-4 mb-4 ml-5' disabled>
-    //           Sign up
-    //         </Button>
-    //       )}
-    //     </Form>
-    //   ) : (
-    //     <Form onSubmit={handleSubmit}>
-    //       <FormGroup>
-    //         <Input
-    //           onChange={setFormValues}
-    //           type='text'
-    //           placeholder='*username'
-    //           name='username'
-    //           disabled
-    //           value={formValues.username}
-    //           id='disabledInput'
-    //         />
-    //       </FormGroup>
-    //       <FormGroup>
-    //         <Input
-    //           onChange={setFormValues}
-    //           type='password'
-    //           placeholder='*password'
-    //           name='password'
-    //           disabled
-    //           value={formValues.password}
-    //           id='disabledInput'
-    //         />
-    //       </FormGroup>
-
-    //       <Button className='loginBtn w-75' disabled>
-    //         Sign up
-    //       </Button>
-    //     </Form>
-    //   )}
-
-    //   <Link to='/login' className='formLink'>
-    //     Already have an account? Log in here!
-    //   </Link>
-    // </div>
   )
 }
 
