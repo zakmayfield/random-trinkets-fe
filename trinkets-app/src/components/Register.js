@@ -38,6 +38,7 @@ const Register = () => {
         })
     }, 2000)
   }
+  
   return (
     <div className='registerComp  w-100 d-flex justify-content-center formCont'>
       <div className='d-inline-block d-flex flex-column align-items-center formSubCont'>
