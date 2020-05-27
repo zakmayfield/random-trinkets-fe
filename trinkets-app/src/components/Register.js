@@ -41,16 +41,19 @@ const Register = () => {
     }, 2000)
   }
   return (
-    <div>
-      <h2>
-        Register
-      </h2>
+    <div className='registerComp  w-100 d-flex justify-content-center'>
+      <div className='d-inline-block w-50 '>
+        <div className='d-flex justify-content-center'>
+          <h2>Register</h2>
+        </div>
 
-      {!localStorage.getItem('TOKEN') ? (
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label className='w-100 label'>
-              *Username
+        {!localStorage.getItem('REGISTER') ? (
+          <Form
+            onSubmit={handleSubmit}
+            className='registerForm  w-100 d-flex flex-column'
+          >
+            <FormGroup>
+              <Label className=''>*Username</Label>
               <Input
                 onChange={setFormValues}
                 type='text'
@@ -58,11 +61,9 @@ const Register = () => {
                 name='username'
                 value={formValues.username}
               />
-            </Label>
-          </FormGroup>
-          <FormGroup>
-            <Label className='w-100 label'>
-              *Email
+            </FormGroup>
+            <FormGroup>
+              <Label>*Email</Label>
               <Input
                 onChange={setFormValues}
                 type='text'
@@ -70,11 +71,9 @@ const Register = () => {
                 name='email'
                 value={formValues.email}
               />
-            </Label>
-          </FormGroup>
-          <FormGroup>
-            <Label className='w-100 label'>
-              Password
+            </FormGroup>
+            <FormGroup>
+              <Label>*Password</Label>
               <Input
                 onChange={setFormValues}
                 type='password'
@@ -82,52 +81,155 @@ const Register = () => {
                 name='password'
                 value={formValues.password}
               />
-            </Label>
-          </FormGroup>
+            </FormGroup>
 
-          {!registering ? (
-            <Button className='w-75 mt-4 mb-4 ml-5'>Sign up</Button>
-          ) : (
-            <Button className='w-75 mt-4 mb-4 ml-5' disabled>
-              Sign up
-            </Button>
-          )}
-        </Form>
-      ) : (
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Input
-              onChange={setFormValues}
-              type='text'
-              placeholder='*username'
-              name='username'
-              disabled
-              value={formValues.username}
-              id='disabledInput'
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              onChange={setFormValues}
-              type='password'
-              placeholder='*password'
-              name='password'
-              disabled
-              value={formValues.password}
-              id='disabledInput'
-            />
-          </FormGroup>
+            <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
+              <Button className='w-50'>Sign up</Button>
+            </FormGroup>
+          </Form>
+        ) : (
+          <Form
+            onSubmit={handleSubmit}
+            className='registerForm  w-100 d-flex flex-column'
+          >
+            <FormGroup>
+              <Label className=''>*Username</Label>
+              <Input
+                onChange={setFormValues}
+                type='text'
+                placeholder='username'
+                name='username'
+                disabled
+                value={formValues.username}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>*Email</Label>
+              <Input
+                onChange={setFormValues}
+                type='text'
+                placeholder='email'
+                name='email'
+                disabled
+                value={formValues.email}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>*Password</Label>
+              <Input
+                onChange={setFormValues}
+                type='password'
+                placeholder='password'
+                name='password'
+                disabled
+                value={formValues.password}
+              />
+            </FormGroup>
 
-          <Button className='loginBtn w-75' disabled>
-            Sign up
-          </Button>
-        </Form>
-      )}
+            <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
+              <Button className='w-50' disabled>
+                Sign up
+              </Button>
+            </FormGroup>
+          </Form>
+        )}
 
-      <Link to='/login' className='formLink'>
-        Already have an account? Log in here!
-      </Link>
+        <div className='w-100 d-flex justify-content-center'>
+          <Link to='/login' className='formLink '>
+            Already have an account? Log in here!
+          </Link>
+        </div>
+      </div>
     </div>
+
+    /////if things go to shit, use this/////
+    // <div>
+    //   <h2>
+    //     Register
+    //   </h2>
+
+    //   {!localStorage.getItem('TOKEN') ? (
+    //     <Form onSubmit={handleSubmit}>
+    //       <FormGroup>
+    //         <Label className='w-100 label'>
+    //           *Username
+    //           <Input
+    //             onChange={setFormValues}
+    //             type='text'
+    //             placeholder='username'
+    //             name='username'
+    //             value={formValues.username}
+    //           />
+    //         </Label>
+    //       </FormGroup>
+    //       <FormGroup>
+    //         <Label className='w-100 label'>
+    //           *Email
+    //           <Input
+    //             onChange={setFormValues}
+    //             type='text'
+    //             placeholder='email'
+    //             name='email'
+    //             value={formValues.email}
+    //           />
+    //         </Label>
+    //       </FormGroup>
+    //       <FormGroup>
+    //         <Label className='w-100 label'>
+    //           Password
+    //           <Input
+    //             onChange={setFormValues}
+    //             type='password'
+    //             placeholder='password'
+    //             name='password'
+    //             value={formValues.password}
+    //           />
+    //         </Label>
+    //       </FormGroup>
+
+    //       {!registering ? (
+    //         <Button className='w-75 mt-4 mb-4 ml-5'>Sign up</Button>
+    //       ) : (
+    //         <Button className='w-75 mt-4 mb-4 ml-5' disabled>
+    //           Sign up
+    //         </Button>
+    //       )}
+    //     </Form>
+    //   ) : (
+    //     <Form onSubmit={handleSubmit}>
+    //       <FormGroup>
+    //         <Input
+    //           onChange={setFormValues}
+    //           type='text'
+    //           placeholder='*username'
+    //           name='username'
+    //           disabled
+    //           value={formValues.username}
+    //           id='disabledInput'
+    //         />
+    //       </FormGroup>
+    //       <FormGroup>
+    //         <Input
+    //           onChange={setFormValues}
+    //           type='password'
+    //           placeholder='*password'
+    //           name='password'
+    //           disabled
+    //           value={formValues.password}
+    //           id='disabledInput'
+    //         />
+    //       </FormGroup>
+
+    //       <Button className='loginBtn w-75' disabled>
+    //         Sign up
+    //       </Button>
+    //     </Form>
+    //   )}
+
+    //   <Link to='/login' className='formLink'>
+    //     Already have an account? Log in here!
+    //   </Link>
+    // </div>
   )
 }
 

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useForm } from '../hooks/useForm.js'
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import axios from 'axios'
 
 const Login = () => {
+  const history = useHistory()
+
   const initialValues = {
     username: '',
     password: ''
@@ -27,6 +29,7 @@ const Login = () => {
           clearForm()
           setLoggingIn(false)
           setFormError('')
+          history.push('/shop')
         })
         .catch(err => {
           setFormError(err.response.data.error)
@@ -36,18 +39,23 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <h2>
-        {localStorage.getItem('TOKEN')
-          ? localStorage.getItem('LOGIN')
-          : 'Log In'}
-      </h2>
+    <div className='registerComp  w-100 d-flex justify-content-center'>
+      <div className='d-inline-block w-50 '>
+        <div className='d-flex justify-content-center'>
+          <h2>
+            {localStorage.getItem('TOKEN')
+              ? localStorage.getItem('LOGIN')
+              : 'Log In'}
+          </h2>
+        </div>
 
-      {!localStorage.getItem('TOKEN') ? (
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label className='w-100 label'>
-              *Username
+        {!localStorage.getItem('TOKEN') ? (
+          <Form
+            onSubmit={handleSubmit}
+            className=' w-100 d-flex flex-column'
+          >
+            <FormGroup>
+              <Label className=''>*Username</Label>
               <Input
                 onChange={setFormValues}
                 type='text'
@@ -55,11 +63,9 @@ const Login = () => {
                 name='username'
                 value={formValues.username}
               />
-            </Label>
-          </FormGroup>
-          <FormGroup>
-            <Label className='w-100 label'>
-              Password
+            </FormGroup>
+            <FormGroup>
+              <Label className=''>*Password</Label>
               <Input
                 onChange={setFormValues}
                 type='password'
@@ -67,53 +73,70 @@ const Login = () => {
                 name='password'
                 value={formValues.password}
               />
-            </Label>
-          </FormGroup>
+            </FormGroup>
 
-          {!loggingIn ? (
-            <Button className='w-75 mt-4 mb-4 ml-5'>Log In</Button>
-          ) : (
-            <Button className='w-75 mt-4 mb-4 ml-5' disabled>
-              Log In
-            </Button>
+            {!loggingIn ? (
+              <Button className='w-75 mt-4 mb-4 ml-5'>Log In</Button>
+            ) : (
+              <Button className='w-75 mt-4 mb-4 ml-5' disabled>
+                Log In
+              </Button>
+            )}
+          </Form>
+        ) : (
+          <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label for='disabledUsername' className=''>
+                *Username
+              </Label>
+              <Input
+                onChange={setFormValues}
+                type='text'
+                placeholder='*username'
+                name='username'
+                disabled
+                value={formValues.username}
+                id='disabledUsername'
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for='disabledPassword' className=''>
+                *Password
+              </Label>
+              <Input
+                onChange={setFormValues}
+                type='password'
+                placeholder='*password'
+                name='password'
+                disabled
+                value={formValues.password}
+                id='disabledPassword'
+              />
+            </FormGroup>
+
+            <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
+              <Button className='w-50'>Log In</Button>
+            </FormGroup>
+          </Form>
+        )}
+
+        <div className='errorsDiv w-100 d-flex justify-content-center'>
+          {formError && (
+            <h4
+              className='formErrors p-1'
+              style={{ color: 'red', background: 'lightyellow' }}
+            >
+              {formError}
+            </h4>
           )}
-        </Form>
-      ) : (
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Input
-              onChange={setFormValues}
-              type='text'
-              placeholder='*username'
-              name='username'
-              disabled
-              value={formValues.username}
-              id='disabledInput'
-            />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              onChange={setFormValues}
-              type='password'
-              placeholder='*password'
-              name='password'
-              disabled
-              value={formValues.password}
-              id='disabledInput'
-            />
-          </FormGroup>
+        </div>
 
-          <Button className='loginBtn w-75' disabled>
-            Log In
-          </Button>
-        </Form>
-      )}
-
-      <div className="errorsDiv">{formError && <h4 className='formErrors'>{formError}</h4>}</div>
-
-      <Link to='/register' id='formLink'>
-        New here? Create an account now!
-      </Link>
+        <div className='w-100 d-flex justify-content-center'>
+          <Link to='/register' className='formLink '>
+            New here? Create an account now!
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

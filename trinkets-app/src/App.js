@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Register from './components/Register'
 import Login from './components/Login'
+import Shop from './components/Shop'
+import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,6 +22,8 @@ function App () {
             <Route path="/login">
               <Login />
             </Route>
+
+            <ProtectedRoute path="/shop" component={Shop}/>
 
             <Route path="/" component={Login} />
           </Switch>

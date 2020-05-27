@@ -2,7 +2,7 @@
   text-align: center;
 } */
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -58,4 +58,11 @@
 
 .label {
   font-size: 15px;
+} */
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  color: white;
+  font-size: calc(10px + 2vmin);
 }
