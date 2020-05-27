@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useForm } from '../hooks/useForm.js'
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap'
+import Loader from 'react-loader-spinner'
 import axios from 'axios'
 
 const Login = () => {
@@ -39,8 +40,8 @@ const Login = () => {
   }
 
   return (
-    <div className='registerComp  w-100 d-flex justify-content-center'>
-      <div className='d-inline-block w-50 d-flex flex-column align-items-center'>
+    <div className='formCont  w-100 d-flex justify-content-center'>
+      <div className='d-inline-block d-flex flex-column align-items-center formSubCont'>
         <div className='d-flex justify-content-center'>
           <h2>
             {localStorage.getItem('TOKEN')
@@ -50,7 +51,11 @@ const Login = () => {
         </div>
 
         {!localStorage.getItem('TOKEN') ? (
-          <Form onSubmit={handleSubmit} className='w-100 d-flex flex-column' style={{maxWidth: "500px"}}>
+          <Form
+            onSubmit={handleSubmit}
+            className='w-100 d-flex flex-column'
+            style={{ maxWidth: '500px' }}
+          >
             <FormGroup>
               <Label className=''>*Username</Label>
               <Input
@@ -74,16 +79,23 @@ const Login = () => {
 
             <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
               {!loggingIn ? (
-                <Button className='w-50'>Log In</Button>
+                <Button className='submitBtn'>Log In</Button>
               ) : (
-                <Button className='w-50' disabled>
-                  Log In
-                </Button>
+                <Loader
+                  type='ThreeDots'
+                  color='#00BFFF'
+                  height={100}
+                  width={50}
+                />
               )}
             </FormGroup>
           </Form>
         ) : (
-          <Form onSubmit={handleSubmit} className='w-100 d-flex flex-column' style={{maxWidth: "500px"}}>
+          <Form
+            onSubmit={handleSubmit}
+            className='w-100 d-flex flex-column'
+            style={{ maxWidth: '500px' }}
+          >
             <FormGroup>
               <Label for='disabledUsername' className=''>
                 *Username
@@ -114,7 +126,7 @@ const Login = () => {
             </FormGroup>
 
             <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
-              <Button className='w-50'>Log In</Button>
+              <Button className='w-50' disabled>Already Logged In</Button>
             </FormGroup>
           </Form>
         )}

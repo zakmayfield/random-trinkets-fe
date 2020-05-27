@@ -66,3 +66,21 @@
   color: white;
   font-size: calc(10px + 2vmin);
 }
+
+@media only screen and (max-width: 500px) {
+  .formSubCont {
+    width: 90%;
+  }
+
+  .submitBtn {
+    width: 75%;
+  }
+}
+@media only screen and (min-width: 500px) {
+  .formSubCont {
+    width: 50%;
+  }
+  .submitBtn {
+    width: 50%;
+  }
+}

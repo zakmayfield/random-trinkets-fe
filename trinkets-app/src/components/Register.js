@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap'
 import { useForm } from '../hooks/useForm.js'
+import Loader from 'react-loader-spinner'
 import axios from 'axios'
 
 const Register = () => {
@@ -38,13 +39,13 @@ const Register = () => {
     }, 2000)
   }
   return (
-    <div className='registerComp  w-100 d-flex justify-content-center'>
-      <div className='d-inline-block w-50 d-flex flex-column align-items-center'>
+    <div className='registerComp  w-100 d-flex justify-content-center formCont'>
+      <div className='d-inline-block d-flex flex-column align-items-center formSubCont'>
         <div className='d-flex justify-content-center'>
           <h2>Register</h2>
         </div>
 
-        {!localStorage.getItem('REGISTER') ? (
+        {!registering ? (
           <Form
             onSubmit={handleSubmit}
             className='w-100 d-flex flex-column'
@@ -82,13 +83,7 @@ const Register = () => {
             </FormGroup>
 
             <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
-              {!registering ? (
-                <Button className='w-50'>Sign Up</Button>
-              ) : (
-                <Button className='w-50' disabled>
-                  Sign Up
-                </Button>
-              )}
+              <Button className='submitBtn'>Sign Up</Button>
             </FormGroup>
           </Form>
         ) : (
@@ -131,9 +126,12 @@ const Register = () => {
             </FormGroup>
 
             <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
-              <Button className='w-50' disabled>
-                Sign up
-              </Button>
+              <Loader
+                type='ThreeDots'
+                color='#00BFFF'
+                height={100}
+                width={50}
+              />
             </FormGroup>
           </Form>
         )}

@@ -7,7 +7,8 @@ import Shop from './components/Shop'
 import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 function App () {
   return (
@@ -15,17 +16,17 @@ function App () {
       <div className='App'>
         <header className='App-header'>
           <Switch>
-            <Route path="/register">
+            <Route path='/register'>
               <Register />
             </Route>
 
-            <Route path="/login">
+            <Route path='/login'>
               <Login />
             </Route>
 
-            <ProtectedRoute path="/shop" component={Shop}/>
+            <ProtectedRoute path='/shop' component={Shop} />
 
-            <Route path="/" component={Login} />
+            <Route path='/' component={Login} />
           </Switch>
         </header>
       </div>
