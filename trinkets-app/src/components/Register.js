@@ -24,9 +24,9 @@ const Register = () => {
 
     setTimeout(() => {
       axios
-        .post(`http://localhost:5500/api/auth/register`, formValues)
+        .post(`https://random-trinkets.herokuapp.com/api/auth/register`, formValues)
         .then(res => {
-          localStorage.setItem('REGISTER', res.data.success)
+          // localStorage.setItem('REGISTER', res.data.success)
           clearForm()
           setRegistering(false)
           setFormError('')
@@ -90,7 +90,8 @@ const Register = () => {
         ) : (
           <Form
             onSubmit={handleSubmit}
-            className='registerForm  w-100 d-flex flex-column'
+            className='w-100 d-flex flex-column'
+            style={{ maxWidth: '500px' }}
           >
             <FormGroup>
               <Label className=''>*Username</Label>

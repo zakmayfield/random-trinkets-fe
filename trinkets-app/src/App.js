@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './components/Register'
 import Login from './components/Login'
 import Shop from './components/Shop'
+import Cart from './components/Cart'
 import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
@@ -25,6 +26,7 @@ function App () {
             </Route>
 
             <ProtectedRoute path='/shop' component={Shop} />
+            <ProtectedRoute path='/:userId/cart' component={Cart} />
 
             <Route path='/' component={Login} />
           </Switch>

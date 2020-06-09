@@ -23,13 +23,18 @@ const Login = () => {
 
     setTimeout(() => {
       axios
-        .post(`http://localhost:5500/api/auth/login`, formValues)
+        .post(
+          `https://random-trinkets.herokuapp.com/api/auth/login`,
+          formValues
+        )
         .then(res => {
           localStorage.setItem('LOGIN', res.data.message)
           localStorage.setItem('TOKEN', res.data.token)
+          localStorage.setItem('USER_ID', res.data.id)
           clearForm()
           setLoggingIn(false)
           setFormError('')
+          console.log(res)
           history.push('/shop')
         })
         .catch(err => {
@@ -43,11 +48,12 @@ const Login = () => {
     <div className='formCont  w-100 d-flex justify-content-center'>
       <div className='d-inline-block d-flex flex-column align-items-center formSubCont'>
         <div className='d-flex justify-content-center'>
-          <h2>
+          {/* <h2>
             {localStorage.getItem('TOKEN')
               ? localStorage.getItem('LOGIN')
               : 'Log In'}
-          </h2>
+          </h2> */}
+          <h2>Log In</h2>
         </div>
 
         {!localStorage.getItem('TOKEN') ? (
@@ -126,7 +132,9 @@ const Login = () => {
             </FormGroup>
 
             <FormGroup className='btnContainer w-100  d-flex justify-content-center'>
-              <Button className='w-50' disabled>Already Logged In</Button>
+              <Button className='w-50' disabled>
+                Already Logged In
+              </Button>
             </FormGroup>
           </Form>
         )}
