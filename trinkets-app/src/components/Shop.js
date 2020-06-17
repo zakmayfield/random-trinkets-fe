@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom'
 
 const Shop = () => {
   const [shop, setShop] = useState([])
-  const userId = localStorage.getItem("USER_ID")
+  const userId = localStorage.getItem("ID")
+
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     axiosWithAuth()
@@ -20,8 +22,28 @@ const Shop = () => {
       })
   }, [])
 
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/users/${userId}`)
+      .then(res => {
+        console.log('THE USER -->', res)
+        if(res.data.username === 'admin'){
+          setIsAdmin(true)
+        } else {
+          setIsAdmin(false)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+
+  }, [])
+
   const addToCart = (item) => {
-    console.log(userId)
+    // console.log(userId)
     const selectedItem = {
         name: item.name,
         price: item.price,
@@ -46,6 +68,8 @@ const Shop = () => {
       <h3>THE SHOP</h3>
       <Link to={`/${userId}/cart`}>View Cart</Link>
       <Link onClick={logOut} to='/' style={{cursor: "pointer", color: "lightblue"}}>Log Out</Link>
+      {isAdmin && <Link to='/add-item' style={{cursor: "pointer", color: "lightgreen"}}>Add an Item</Link>}
+      
 
       {
           shop.length === 0 

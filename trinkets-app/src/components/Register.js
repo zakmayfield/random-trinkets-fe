@@ -26,7 +26,6 @@ const Register = () => {
       axios
         .post(`https://random-trinkets.herokuapp.com/api/auth/register`, formValues)
         .then(res => {
-          // localStorage.setItem('REGISTER', res.data.success)
           clearForm()
           setRegistering(false)
           setFormError('')
